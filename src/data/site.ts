@@ -195,11 +195,26 @@ export const testimonials = [
   },
 ]
 
+import gallery1_400 from '../assets/gallery/gallery-1-400.webp'
+import gallery1_800 from '../assets/gallery/gallery-1-800.webp'
+import gallery2_400 from '../assets/gallery/gallery-2-400.webp'
+import gallery2_800 from '../assets/gallery/gallery-2-800.webp'
+import gallery3_400 from '../assets/gallery/gallery-3-400.webp'
+import gallery3_800 from '../assets/gallery/gallery-3-800.webp'
+import gallery4_400 from '../assets/gallery/gallery-4-400.webp'
+import gallery4_800 from '../assets/gallery/gallery-4-800.webp'
+import gallery5_400 from '../assets/gallery/gallery-5-400.webp'
+import gallery5_800 from '../assets/gallery/gallery-5-800.webp'
+import gallery6_400 from '../assets/gallery/gallery-6-400.webp'
+import gallery6_800 from '../assets/gallery/gallery-6-800.webp'
+
+// Self-hosted (rather than hotlinked to Unsplash) so the gallery doesn't
+// depend on a third-party origin.
 export const gallery = [
-  { src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=70', alt: 'Glossy neutral manicure' },
-  { src: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=70', alt: 'Nail art detail' },
-  { src: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=70', alt: 'Soft glam lashes' },
-  { src: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&q=70', alt: 'Calm salon interior' },
-  { src: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=70', alt: 'French tip nails' },
-  { src: 'https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=800&q=70', alt: 'Elegant nail set' },
+  { src: gallery1_800, src400: gallery1_400, alt: 'Glossy neutral manicure' },
+  { src: gallery2_800, src400: gallery2_400, alt: 'Nail art detail' },
+  { src: gallery3_800, src400: gallery3_400, alt: 'Soft glam lashes' },
+  { src: gallery4_800, src400: gallery4_400, alt: 'Calm salon interior' },
+  { src: gallery5_800, src400: gallery5_400, alt: 'French tip nails' },
+  { src: gallery6_800, src400: gallery6_400, alt: 'Elegant nail set' },
 ]

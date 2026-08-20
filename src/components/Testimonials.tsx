@@ -3,11 +3,10 @@ import { testimonials } from '../data/site'
 import { Reveal } from './Reveal'
 import { LazyImage } from './LazyImage'
 import { ArrowLeft, Arrow } from './Icons'
+import testimonial1 from '../assets/services/testimonial-1-600.webp'
+import testimonial2 from '../assets/services/testimonial-2-600.webp'
 
-const photos = [
-  'https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=600&q=70',
-  'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=70',
-]
+const photos = [testimonial1, testimonial2]
 
 export function Testimonials() {
   const [i, setI] = useState(0)

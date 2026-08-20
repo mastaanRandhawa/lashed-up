@@ -3,13 +3,26 @@ import { services, fullMenu, site } from '../data/site'
 import { Reveal } from './Reveal'
 import { ArrowUpRight } from './Icons'
 
-// Curated headline services for the editorial list
+import service1_500 from '../assets/services/service-1-500.webp'
+import service1_900 from '../assets/services/service-1-900.webp'
+import service2_500 from '../assets/services/service-2-500.webp'
+import service2_900 from '../assets/services/service-2-900.webp'
+import service3_500 from '../assets/services/service-3-500.webp'
+import service3_900 from '../assets/services/service-3-900.webp'
+import service4_500 from '../assets/services/service-4-500.webp'
+import service4_900 from '../assets/services/service-4-900.webp'
+import service5_500 from '../assets/services/service-5-500.webp'
+import service5_900 from '../assets/services/service-5-900.webp'
+
+// Curated headline services for the editorial list. Self-hosted (rather
+// than hotlinked to Unsplash) so this section doesn't depend on a
+// third-party origin.
 const menu = [
-  { title: 'Russian Manicure', img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=70' },
-  { title: 'Gel-X Enhancement', img: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=900&q=70' },
-  { title: 'Permanent Makeup', img: 'https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=900&q=70' },
-  { title: 'Lashes & Brows', img: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=900&q=70' },
-  { title: 'Skin Care & Waxing', img: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=900&q=70' },
+  { title: 'Russian Manicure', img500: service1_500, img900: service1_900 },
+  { title: 'Gel-X Enhancement', img500: service2_500, img900: service2_900 },
+  { title: 'Permanent Makeup', img500: service3_500, img900: service3_900 },
+  { title: 'Lashes & Brows', img500: service4_500, img900: service4_900 },
+  { title: 'Skin Care & Waxing', img500: service5_500, img900: service5_900 },
 ]
 
 export function Services() {
@@ -61,8 +74,8 @@ export function Services() {
             {menu.map((m, i) => (
               <img
                 key={m.title}
-                src={m.img}
-                srcSet={`${m.img.replace(/w=\d+/, 'w=500')} 500w, ${m.img.replace(/w=\d+/, 'w=900')} 900w`}
+                src={m.img900}
+                srcSet={`${m.img500} 500w, ${m.img900} 900w`}
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 alt={m.title}
                 loading="lazy"

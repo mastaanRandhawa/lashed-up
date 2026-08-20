@@ -30,7 +30,7 @@ export function Gallery() {
             >
               <LazyImage
                 src={g.src}
-                srcSet={`${g.src.replace(/w=\d+/, 'w=400')} 400w, ${g.src.replace(/w=\d+/, 'w=800')} 800w`}
+                srcSet={`${g.src400} 400w, ${g.src} 800w`}
                 sizes="(min-width: 1024px) 25vw, 50vw"
                 alt={g.alt}
                 className="h-full w-full object-cover ease-out group-hover:scale-105"

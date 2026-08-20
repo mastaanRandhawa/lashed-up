@@ -2,14 +2,24 @@ import { useEffect, useState } from 'react'
 import { site } from '../data/site'
 import { ArrowUpRight } from './Icons'
 
+import hero1_700 from '../assets/hero/hero-1-700.webp'
+import hero1_1400 from '../assets/hero/hero-1-1400.webp'
+import hero2_700 from '../assets/hero/hero-2-700.webp'
+import hero2_1400 from '../assets/hero/hero-2-1400.webp'
+import hero3_700 from '../assets/hero/hero-3-700.webp'
+import hero3_1400 from '../assets/hero/hero-3-1400.webp'
+import hero4_700 from '../assets/hero/hero-4-700.webp'
+import hero4_1400 from '../assets/hero/hero-4-1400.webp'
+
 // Soft, dreamy salon imagery that auto cross-fades behind the hero.
+// Self-hosted (rather than hotlinked) so the LCP image doesn't wait on a
+// third-party origin's DNS/TLS handshake.
 const slides = [
-  'https://images.unsplash.com/photo-1600948836101-f9ffda59d250',
-  'https://images.unsplash.com/photo-1604654894610-df63bc536371',
-  'https://images.unsplash.com/photo-1610992015732-2449b76344bc',
-  'https://images.unsplash.com/photo-1522337660859-02fbefca4702',
+  { src700: hero1_700, src1400: hero1_1400 },
+  { src700: hero2_700, src1400: hero2_1400 },
+  { src700: hero3_700, src1400: hero3_1400 },
+  { src700: hero4_700, src1400: hero4_1400 },
 ]
-const src = (base: string, w: number) => `${base}?auto=format&fit=crop&w=${w}&q=55`
 
 export function Hero() {
   const [active, setActive] = useState(0)
@@ -39,9 +49,9 @@ export function Hero() {
           const show = i === 0 || loadRest
           return (
             <img
-              key={s}
-              src={show ? src(s, 1400) : undefined}
-              srcSet={show ? `${src(s, 700)} 700w, ${src(s, 1400)} 1400w` : undefined}
+              key={s.src1400}
+              src={show ? s.src1400 : undefined}
+              srcSet={show ? `${s.src700} 700w, ${s.src1400} 1400w` : undefined}
               sizes="100vw"
               alt=""
               aria-hidden="true"

@@ -2,6 +2,8 @@ import { site } from '../data/site'
 import { Reveal } from './Reveal'
 import { LazyImage } from './LazyImage'
 import { ArrowUpRight } from './Icons'
+import about1_600 from '../assets/gallery/about-1-600.webp'
+import about1_1000 from '../assets/gallery/about-1-1000.webp'
 
 export function About() {
   return (
@@ -26,7 +28,9 @@ export function About() {
           <Reveal className="flex flex-col gap-6" delay={120}>
             <div className="overflow-hidden rounded-2xl shadow-[var(--shadow-card)]">
               <LazyImage
-                src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=70"
+                src={about1_600}
+                srcSet={`${about1_600} 600w, ${about1_1000} 1000w`}
+                sizes="(min-width: 1024px) 40vw, 90vw"
                 alt="Elegant French manicure"
                 className="h-56 w-full object-cover"
               />
