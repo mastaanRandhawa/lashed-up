@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
 import { site } from '../data/site'
-import { ArrowUpRight, Menu, Phone } from './Icons'
-import logo from '../assets/theo-stella-logo.webp'
+import { ArrowUpRight, Instagram, Menu } from './Icons'
+import { Wordmark } from './Wordmark'
 
 const links = [
   { label: 'Home', href: '#top' },
-  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Gallery', href: '#gallery' },
-  { label: 'Reviews', href: '#reviews' },
+  { label: 'About', href: '#about' },
   { label: 'FAQ', href: '#faq' },
-  { label: 'Gift Cards', href: '#offers' },
-  { label: 'Visit', href: '#visit' },
+  { label: 'Contact', href: '#visit' },
 ]
 
 export function Navbar() {
@@ -32,63 +30,78 @@ export function Navbar() {
     }
   }, [open])
 
-  // Dark text everywhere except while the dark overlay menu is open.
-  const light = open
+  // Light text while over the dark hero (top, not yet scrolled) or while the
+  // dark overlay menu is open; dark text once the cream bar appears on scroll.
+  const light = open || !scrolled
 
   return (
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled && !open
-            ? 'bg-cream/85 py-2 shadow-[0_10px_30px_-26px_rgba(59,45,48,0.7)] backdrop-blur-md'
+            ? 'bg-cream/85 py-2 shadow-[0_10px_30px_-26px_rgba(27,19,48,0.7)] backdrop-blur-md'
             : 'bg-transparent py-4'
         }`}
       >
         <nav className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-6 lg:px-10">
-          {/* Left — logo */}
-          <a href="#top" className="justify-self-start" onClick={() => setOpen(false)}>
-            {light ? (
-              <span className="font-serif text-2xl font-semibold tracking-wide text-cream">
-                Theo<span className="text-rose">·</span>Stella
-              </span>
-            ) : (
-              <img
-                src={logo}
-                alt="Theo·Stella Beauty Bar"
-                width={480}
-                height={480}
-                fetchPriority="high"
-                decoding="async"
-                className="h-12 w-auto sm:h-14"
-              />
-            )}
-          </a>
-
-          {/* Center — contact */}
+          {/* Left — wordmark */}
           <a
-            href={site.phoneHref}
-            className={`hidden items-center gap-2 justify-self-center text-sm tracking-[0.14em] transition-colors md:flex ${
-              light ? 'text-cream/80' : 'text-plum/70'
-            }`}
+            href="#top"
+            className="justify-self-start"
+            onClick={() => setOpen(false)}
+            aria-label="Lashed Up — home"
           >
-            <Phone className="h-4 w-4" />
-            {site.phone}
-            <span className="mx-1 opacity-40">·</span> Surrey, BC
+            <Wordmark
+              tone={light ? 'light' : 'dark'}
+              className={`text-sm tracking-[0.24em] sm:text-xl sm:tracking-[0.34em] ${
+                light ? 'text-cream' : 'text-plum'
+              }`}
+            />
           </a>
 
-          {/* Right — menu toggle */}
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className={`flex items-center gap-2 justify-self-end rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-colors ${
-              light
-                ? 'border-cream/40 text-cream hover:bg-cream hover:text-plum'
-                : 'border-plum/25 text-plum hover:bg-plum hover:text-cream'
-            }`}
-            aria-expanded={open}
-          >
-            <Menu className="h-4 w-4" />
-            {open ? 'Close' : 'Menu'}
-          </button>
+          {/* Center — desktop links */}
+          <div className="hidden items-center gap-7 justify-self-center lg:flex">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className={`text-xs uppercase tracking-[0.18em] transition-colors ${
+                  light ? 'text-cream/80 hover:text-cream' : 'text-plum/70 hover:text-plum'
+                }`}
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right — book + menu */}
+          <div className="flex items-center gap-2 justify-self-end sm:gap-3">
+            <a
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`rounded-full px-4 py-2 text-[0.65rem] uppercase tracking-[0.16em] transition-colors sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.18em] ${
+                light
+                  ? 'bg-cream text-plum hover:bg-gold-soft'
+                  : 'bg-plum text-cream hover:bg-espresso'
+              }`}
+            >
+              Book<span className="hidden sm:inline"> Now</span>
+            </a>
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className={`flex items-center gap-2 rounded-full border px-3 py-2 text-[0.65rem] uppercase tracking-[0.16em] transition-colors sm:px-5 sm:py-2.5 sm:text-xs sm:tracking-[0.18em] ${
+                light
+                  ? 'border-cream/40 text-cream hover:bg-cream hover:text-plum'
+                  : 'border-plum/25 text-plum hover:bg-plum hover:text-cream'
+              }`}
+              aria-expanded={open}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+            >
+              <Menu className="h-4 w-4" />
+              <span className="hidden sm:inline">{open ? 'Close' : 'Menu'}</span>
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -120,15 +133,21 @@ export function Navbar() {
           </ul>
 
           <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-sm text-cream/60">
-              <div>{site.address.line1}</div>
-              <div>{site.address.line2}</div>
-            </div>
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-rose"
+            >
+              <Instagram className="h-4 w-4" />
+              {site.instagramHandle}
+            </a>
             <a
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex w-fit items-center gap-2 rounded-full bg-rose px-8 py-4 text-sm uppercase tracking-[0.16em] text-espresso transition-all hover:bg-cream"
+              className="group flex w-fit items-center gap-2 rounded-full bg-rose px-8 py-4 text-sm uppercase tracking-[0.16em] text-cream transition-all hover:bg-cream hover:text-plum"
             >
               Book an Appointment
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

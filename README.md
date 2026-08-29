@@ -1,32 +1,30 @@
-# React + TypeScript + Vite
+# LASHED UP
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Marketing site for **LASHED UP** — a private, home-based lash studio in Surrey, BC
+offering hybrid, volume, mega volume and wet lash sets, fills, removals and lash
+lifts.
 
-Currently, two official plugins are available:
+Built with React + TypeScript + Vite + Tailwind CSS v4.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Content source of truth: [lashedupxx.square.site](https://lashedupxx.square.site/)
+- Brand / imagery: [@_.lashedup._](https://www.instagram.com/_.lashedup._/)
 
-## React Compiler
+## Develop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Build & lint
+
+```bash
+npm run build
+npm run lint
+```
+
+## Deploy
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and
+publishes `dist/` to GitHub Pages. The Vite `base` is `/lashed-up/` in
+production (see `vite.config.ts`).

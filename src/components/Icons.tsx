@@ -29,7 +29,22 @@ export function Google({ className = 'h-5 w-5' }: IconProps) {
   )
 }
 
-const map = { instagram: Instagram, facebook: Facebook, google: Google }
+export function Calendar({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
+      <path d="M3.5 9.5h17M8 3.5v3M16 3.5v3" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+const map = {
+  instagram: Instagram,
+  facebook: Facebook,
+  google: Google,
+  calendar: Calendar,
+  mail: Mail,
+}
 
 export function SocialIcon({ name, className }: { name: string; className?: string }) {
   const Cmp = map[name as keyof typeof map] ?? Instagram

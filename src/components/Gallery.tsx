@@ -1,21 +1,22 @@
-import { gallery } from '../data/site'
+import { gallery, site } from '../data/site'
 import { Reveal } from './Reveal'
 import { LazyImage } from './LazyImage'
+import { ArrowUpRight, Instagram } from './Icons'
 
 export function Gallery() {
   return (
     <section id="gallery" className="bg-cream py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="editorial-label">(C) — A Glimpse of Our Work</Reveal>
+        <Reveal className="editorial-label">Gallery — Our Work</Reveal>
 
         <Reveal className="mt-6 flex flex-col items-end justify-between gap-6 sm:flex-row">
           <h2 className="font-serif text-4xl text-plum sm:text-5xl">
-            Recent work
-            <span className="block italic text-mauve">from the chair</span>
+            Sets from
+            <span className="block italic text-mauve">the studio</span>
           </h2>
           <p className="max-w-sm text-sm font-light text-plum/60">
-            A glimpse of the finishes, textures and detail we love to create. Follow
-            along on Instagram for the latest sets.
+            Hybrids, wet sets, volumes and lifts — straight from the Lashed Up feed.
+            Follow along for the latest work and openings.
           </p>
         </Reveal>
 
@@ -38,6 +39,19 @@ export function Gallery() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-10 flex justify-center">
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-full border border-mauve/30 px-7 py-3.5 text-sm uppercase tracking-[0.16em] text-plum transition-colors hover:border-plum hover:bg-plum hover:text-cream"
+          >
+            <Instagram className="h-4 w-4" />
+            Follow {site.instagramHandle}
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </Reveal>
       </div>
     </section>
   )

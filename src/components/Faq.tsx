@@ -9,13 +9,13 @@ export function Faq() {
   return (
     <section id="faq" className="bg-shell/50 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="editorial-label">(E) — Let&apos;s Find Out With FAQ</Reveal>
+        <Reveal className="editorial-label">FAQ — Before You Book</Reveal>
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
             <h2 className="font-serif text-4xl leading-tight text-plum sm:text-5xl">
-              Soft Whispers
-              <span className="block italic text-mauve">of Clarity</span>
+              Good to
+              <span className="block italic text-mauve">know</span>
             </h2>
           </Reveal>
 

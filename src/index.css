@@ -25,17 +25,19 @@
 }
 
 @theme {
-  /* Brand palette — Theo·Stella blush pink, rose & gold on warm cream */
-  --color-cream: #faf3ef;
-  --color-shell: #f3e3dd;
-  --color-blush: #f6d4d8;
-  --color-rose: #e5a2ac;
-  --color-mauve: #c98795;
-  --color-plum: #3b2d30;
-  --color-espresso: #271d20;
-  --color-ink: #17100f;
-  --color-gold: #c19a5b;
-  --color-gold-soft: #d9bd8a;
+  /* Brand palette — LASHED UP orchid & violet on soft lavender-white.
+     Drawn from the studio's Instagram: deep aubergine, violet light,
+     black lash-print accents, a warm skin-tone glow. */
+  --color-cream: #f7f4fa;
+  --color-shell: #ece5f3;
+  --color-blush: #e6d6ee;
+  --color-rose: #9b6dd6;
+  --color-mauve: #8a7aa8;
+  --color-plum: #241a30;
+  --color-espresso: #1b1330;
+  --color-ink: #130c22;
+  --color-gold: #b98fd6;
+  --color-gold-soft: #d9c2ec;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif;

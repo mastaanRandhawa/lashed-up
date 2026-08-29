@@ -1,70 +1,64 @@
-import { useState } from 'react'
 import { site } from '../data/site'
 import { Reveal } from './Reveal'
-import { Arrow, Clock, Mail, MapPin, Phone } from './Icons'
+import { Arrow, Calendar, Instagram, Mail, MapPin } from './Icons'
 
 export function Visit() {
-  const [mapLoaded, setMapLoaded] = useState(false)
-  const [mapReady, setMapReady] = useState(false)
-
-  // Privacy-friendly OpenStreetMap embed — no cookies/tracking, so it never
-  // triggers Safari's cross-site permission prompts (unlike the Google embed).
-  const { lat, lon } = site.address
-  const d = 0.006
-  const bbox = `${lon - d},${lat - d * 0.6},${lon + d},${lat + d * 0.6}`
-  const mapEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(
-    bbox,
-  )}&layer=mapnik&marker=${lat},${lon}`
-
   return (
     <section id="visit" className="bg-cream py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-xs uppercase tracking-luxe text-mauve">Come See Us</span>
+          <span className="text-xs uppercase tracking-luxe text-mauve">Contact</span>
           <h2 className="mt-4 font-serif text-4xl text-plum sm:text-5xl">
-            Visit the beauty bar
+            Booking &amp; where to find us
           </h2>
         </Reveal>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-          {/* Details */}
           <Reveal className="flex flex-col gap-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <InfoCard icon={<MapPin />} label="Location">
+                {site.location.label}
+                <span className="mt-1 block text-sm text-mauve">
+                  {site.location.detail}
+                </span>
+              </InfoCard>
+
+              <InfoCard icon={<Calendar />} label="Booking">
                 <a
-                  href={site.address.mapUrl}
+                  href={site.bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-rose"
                 >
-                  {site.address.line1}
-                  <br />
-                  {site.address.line2}
+                  Online, by appointment
                 </a>
+                <span className="mt-1 block text-sm text-mauve">
+                  Fills every 2–3 weeks
+                </span>
               </InfoCard>
 
-              <InfoCard icon={<Clock />} label="Hours">
-                {site.hours.map((h) => (
-                  <div key={h.day} className="mb-1 last:mb-0">
-                    <div className="text-plum">{h.day}</div>
-                    <div className="text-sm text-mauve">{h.time}</div>
-                  </div>
-                ))}
-              </InfoCard>
-
-              <InfoCard icon={<Phone />} label="Call">
-                <a href={site.phoneHref} className="transition-colors hover:text-rose">
-                  {site.phone}
+              <InfoCard icon={<Instagram />} label="Instagram">
+                <a
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-rose"
+                >
+                  {site.instagramHandle}
                 </a>
+                <span className="mt-1 block text-sm text-mauve">
+                  Lifts, tints &amp; after-hours by DM
+                </span>
               </InfoCard>
 
               <InfoCard icon={<Mail />} label="Email">
                 <a
-                  href={`mailto:${site.email}`}
+                  href={site.emailHref}
                   className="break-all transition-colors hover:text-rose"
                 >
                   {site.email}
                 </a>
+                <span className="mt-1 block text-sm text-mauve">Deposit &amp; enquiries</span>
               </InfoCard>
             </div>
 
@@ -75,61 +69,30 @@ export function Visit() {
               className="group mt-1 flex items-center justify-between rounded-3xl bg-plum px-8 py-6 text-cream transition-all hover:bg-espresso"
             >
               <div>
-                <div className="font-serif text-2xl">Book your appointment</div>
+                <div className="font-serif text-2xl">Book an appointment</div>
                 <div className="text-sm text-cream/70">Real-time availability online</div>
               </div>
               <Arrow className="h-6 w-6 transition-transform group-hover:translate-x-1.5" />
             </a>
           </Reveal>
 
-          {/* Map — loads only after the visitor taps, keeping the first load light */}
-          <Reveal className="relative min-h-[24rem] overflow-hidden rounded-3xl border border-mauve/15 shadow-[var(--shadow-card)]">
-            {mapLoaded ? (
-              <>
-                {!mapReady && (
-                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-shell/60">
-                    <span className="h-9 w-9 animate-spin rounded-full border-2 border-mauve/30 border-t-rose" />
-                    <span className="editorial-label">Loading map…</span>
-                  </div>
-                )}
-                <iframe
-                  title="Map to Theo·Stella Beauty Bar"
-                  src={mapEmbed}
-                  className="h-full min-h-[24rem] w-full"
-                  onLoad={() => setMapReady(true)}
-                />
-                <a
-                  href={site.address.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-4 right-4 z-10 rounded-full bg-plum/90 px-4 py-2 text-xs uppercase tracking-[0.14em] text-cream backdrop-blur transition-colors hover:bg-espresso"
-                >
-                  Get Directions
-                </a>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setMapLoaded(true)}
-                aria-label="Load interactive map"
-                className="group flex h-full min-h-[24rem] w-full flex-col items-center justify-center gap-4 bg-shell/60 transition-colors hover:bg-shell"
-                style={{
-                  backgroundImage:
-                    'radial-gradient(circle at 30% 30%, rgba(229,162,172,0.18), transparent 45%), radial-gradient(circle at 75% 70%, rgba(193,154,91,0.14), transparent 45%)',
-                }}
-              >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-cream text-rose shadow-[var(--shadow-card)] transition-transform group-hover:scale-105">
-                  <MapPin className="h-7 w-7" />
-                </span>
-                <span className="font-serif text-2xl text-plum">View the map</span>
-                <span className="text-sm font-light text-plum/60">
-                  {site.address.line1}, {site.address.line2}
-                </span>
-                <span className="mt-1 rounded-full border border-mauve/40 px-5 py-2 text-xs uppercase tracking-[0.16em] text-plum transition-colors group-hover:border-plum group-hover:bg-plum group-hover:text-cream">
-                  Tap to load
-                </span>
-              </button>
-            )}
+          <Reveal className="relative overflow-hidden rounded-3xl border border-mauve/15 bg-espresso p-8 text-cream shadow-[var(--shadow-card)] sm:p-10">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-rose/25 blur-[80px]" />
+            <span className="editorial-label text-gold-soft">Deposit</span>
+            <p className="mt-5 font-serif text-2xl leading-snug text-cream sm:text-3xl">
+              {site.deposit}
+            </p>
+            <p className="mt-4 text-sm font-light leading-relaxed text-cream/70">
+              The deposit comes off your service total on the day. Please come with clean
+              lashes and no eye makeup, and message ahead if you need to reschedule.
+            </p>
+            <a
+              href={site.depositEmailHref}
+              className="group mt-8 flex w-fit items-center gap-2 rounded-full bg-rose px-6 py-3 text-xs uppercase tracking-[0.16em] text-cream transition-all hover:bg-cream hover:text-plum"
+            >
+              Send Deposit
+              <Arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </Reveal>
         </div>
       </div>
@@ -147,7 +110,7 @@ function InfoCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="rounded-3xl border border-mauve/15 bg-white/60 p-6">
+    <div className="rounded-3xl border border-mauve/15 bg-shell/40 p-6">
       <div className="flex items-center gap-2 text-mauve">
         <span className="text-rose">{icon}</span>
         <span className="text-xs uppercase tracking-[0.16em]">{label}</span>

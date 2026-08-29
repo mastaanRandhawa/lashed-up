@@ -1,55 +1,44 @@
 import { site } from '../data/site'
 import { SocialIcon } from './Icons'
-import logo from '../assets/theo-stella-logo.webp'
+import { Wordmark } from './Wordmark'
 
 const nav = [
   ['Home', '#top'],
-  ['About', '#about'],
   ['Services', '#services'],
   ['Gallery', '#gallery'],
-  ['Reviews', '#reviews'],
+  ['About', '#about'],
+  ['The Experience', '#experience'],
   ['FAQ', '#faq'],
-  ['Gift Cards', '#offers'],
-  ['Visit', '#visit'],
+  ['Contact', '#visit'],
 ]
 
 export function Footer() {
   return (
     <footer className="bg-ink text-cream">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Logo badge */}
         <div className="flex justify-center pt-14">
-          <div className="rounded-full bg-cream/95 px-8 py-6 shadow-[var(--shadow-card)]">
-            <img
-              src={logo}
-              alt="Theo·Stella Beauty Bar"
-              width={480}
-              height={480}
-              loading="lazy"
-              decoding="async"
-              className="h-20 w-auto"
-            />
-          </div>
+          <Wordmark tone="light" className="text-xl text-cream sm:text-2xl" />
         </div>
 
-        {/* Top: contact + nav + socials */}
         <div className="grid gap-10 pb-16 pt-14 md:grid-cols-3">
           <div>
-            <p className="editorial-label text-gold-soft">Visit</p>
-            <a
-              href={site.address.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 block text-sm font-light text-cream/70 transition-colors hover:text-rose"
-            >
-              {site.address.line1}
+            <p className="editorial-label text-gold-soft">Studio</p>
+            <p className="mt-4 text-sm font-light text-cream/70">
+              {site.location.label}
               <br />
-              {site.address.line2}
-            </a>
+              {site.location.detail}
+            </p>
             <div className="mt-4 space-y-1 text-sm font-light text-cream/70">
-              <a href={site.phoneHref} className="block hover:text-rose">{site.phone}</a>
-              <a href={`mailto:${site.email}`} className="block break-all hover:text-rose">
+              <a href={site.emailHref} className="block break-all hover:text-rose">
                 {site.email}
+              </a>
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:text-rose"
+              >
+                {site.instagramHandle}
               </a>
             </div>
           </div>
@@ -59,21 +48,37 @@ export function Footer() {
             <ul className="mt-4 space-y-2 text-sm font-light text-cream/70">
               {nav.map(([label, href]) => (
                 <li key={href}>
-                  <a href={href} className="transition-colors hover:text-rose">{label}</a>
+                  <a href={href} className="transition-colors hover:text-rose">
+                    {label}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <p className="editorial-label text-gold-soft">Hours</p>
+            <p className="editorial-label text-gold-soft">Book</p>
             <ul className="mt-4 space-y-2 text-sm font-light text-cream/70">
-              {site.hours.map((h) => (
-                <li key={h.day}>
-                  <div>{h.day}</div>
-                  <div className="text-cream/45">{h.time}</div>
-                </li>
-              ))}
+              <li>
+                <a
+                  href={site.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-rose"
+                >
+                  Online booking
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-rose"
+                >
+                  Shop &amp; aftercare
+                </a>
+              </li>
             </ul>
             <div className="mt-6 flex gap-3">
               {site.socials.map((s) => (
@@ -93,31 +98,34 @@ export function Footer() {
         </div>
 
         {/* Giant wordmark — SVG scales to fit width, never overflows */}
-        <a href="#top" className="block border-t border-cream/10 pt-10" aria-label="Theo·Stella">
+        <a
+          href="#top"
+          className="block border-t border-cream/10 pt-10"
+          aria-label="Lashed Up"
+        >
           <svg
-            viewBox="0 0 1000 210"
+            viewBox="0 0 1000 190"
             className="block w-full text-cream/95"
             role="img"
-            aria-label="Theo·Stella"
+            aria-label="Lashed Up"
           >
             <text
               x="0"
-              y="168"
+              y="150"
               textLength="1000"
               lengthAdjust="spacingAndGlyphs"
               fill="currentColor"
               style={{ fontFamily: 'var(--font-serif)', fontWeight: 600 }}
-              fontSize="200"
+              fontSize="180"
             >
-              Theo
-              <tspan fill="#e5a2ac">·</tspan>
-              Stella
+              LASHED
+              <tspan fill="#b58be4"> UP</tspan>
             </text>
           </svg>
         </a>
 
         <div className="flex flex-col items-center justify-between gap-3 py-8 text-xs text-cream/40 sm:flex-row">
-          <p>© {new Date().getFullYear()} Theo·Stella Beauty Bar</p>
+          <p>© {new Date().getFullYear()} Lashed Up</p>
           <p>Surrey, British Columbia · By appointment</p>
         </div>
       </div>

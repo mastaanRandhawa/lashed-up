@@ -6,11 +6,11 @@ export function Offers() {
   return (
     <section id="offers" className="bg-shell/50 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="editorial-label">(F) — Gift Cards &amp; Promotions</Reveal>
+        <Reveal className="editorial-label">Booking — How It Works</Reveal>
 
         <Reveal className="mt-6 max-w-2xl font-serif text-4xl leading-tight text-plum sm:text-5xl">
-          A little something
-          <span className="italic text-mauve"> extra.</span>
+          Ready for your
+          <span className="italic text-mauve"> next set?</span>
         </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">

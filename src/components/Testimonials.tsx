@@ -1,78 +1,77 @@
-import { useState } from 'react'
-import { testimonials } from '../data/site'
+import { site } from '../data/site'
 import { Reveal } from './Reveal'
 import { LazyImage } from './LazyImage'
-import { ArrowLeft, Arrow } from './Icons'
-import testimonial1 from '../assets/services/testimonial-1-600.webp'
-import testimonial2 from '../assets/services/testimonial-2-600.webp'
+import { ArrowUpRight } from './Icons'
+import experience1 from '../assets/services/testimonial-1-600.webp'
+import experience2 from '../assets/services/testimonial-2-600.webp'
 
-const photos = [testimonial1, testimonial2]
+const steps = [
+  {
+    title: 'Style consult',
+    body: 'We look at your natural lashes and eye shape and pick a set, curl and shape that suits them — cat or doll, soft or dramatic.',
+  },
+  {
+    title: 'Lash & relax',
+    body: 'You lie back with your eyes closed while each extension is placed by hand. A full set takes around two hours, a fill about one.',
+  },
+  {
+    title: 'Aftercare',
+    body: 'You leave with a mirror check and simple aftercare: cleanse daily, brush them through, book your fill in 2–3 weeks.',
+  },
+]
 
 export function Testimonials() {
-  const [i, setI] = useState(0)
-  const t = testimonials[i]
-  const go = (dir: number) =>
-    setI((v) => (v + dir + testimonials.length) % testimonials.length)
-
   return (
-    <section id="reviews" className="bg-cream py-24 lg:py-32">
+    <section id="experience" className="bg-cream py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          {/* Images */}
           <Reveal className="flex gap-4">
             <div className="mt-10 flex-1 overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
-              <LazyImage src={photos[0]} alt="Guest in the studio" className="h-72 w-full object-cover" />
+              <LazyImage
+                src={experience1}
+                alt="Finished lash set, close up"
+                className="h-72 w-full object-cover"
+              />
             </div>
             <div className="flex-1 overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
-              <LazyImage src={photos[1]} alt="Finished nail set" className="h-80 w-full object-cover" />
+              <LazyImage
+                src={experience2}
+                alt="Client after a lash appointment at Lashed Up"
+                className="h-80 w-full object-cover"
+              />
             </div>
           </Reveal>
 
-          {/* Quote */}
           <Reveal className="flex flex-col justify-center">
-            <div className="flex items-center gap-4">
-              <span className="font-serif text-3xl text-plum">4.9/5</span>
-              <div className="flex gap-1 text-gold">
-                {Array.from({ length: 5 }).map((_, s) => (
-                  <svg key={s} className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.9 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="editorial-label ml-auto hidden sm:block">
-                (D) — Hear From Real Guests
-              </span>
+            <span className="editorial-label">The Experience</span>
+            <h2 className="mt-4 font-serif text-4xl leading-tight text-plum sm:text-5xl">
+              What an appointment
+              <span className="block italic text-mauve">actually looks like</span>
+            </h2>
+
+            <div className="mt-10 space-y-6">
+              {steps.map((s, i) => (
+                <div key={s.title} className="flex gap-5 border-b border-mauve/15 pb-6">
+                  <span className="font-serif text-2xl text-mauve">0{i + 1}</span>
+                  <div>
+                    <div className="font-serif text-xl text-plum">{s.title}</div>
+                    <p className="mt-1 max-w-md text-sm font-light leading-relaxed text-plum/65">
+                      {s.body}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <blockquote className="mt-8 font-serif text-3xl leading-[1.28] text-plum sm:text-4xl">
-              <span className="text-mauve">—</span> {t.quote}
-            </blockquote>
-
-            <div className="mt-10 flex items-center justify-between">
-              <div>
-                <div className="font-serif text-3xl italic text-mauve">{t.author}</div>
-                <div className="editorial-label mt-1">{t.detail}</div>
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="text-sm tracking-[0.2em] text-plum/50">
-                  0{i + 1}/0{testimonials.length}
-                </span>
-                <button
-                  onClick={() => go(-1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-mauve/30 text-plum transition-colors hover:bg-plum hover:text-cream"
-                  aria-label="Previous review"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={() => go(1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-mauve/30 text-plum transition-colors hover:bg-plum hover:text-cream"
-                  aria-label="Next review"
-                >
-                  <Arrow className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
+            <a
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 flex w-fit items-center gap-2 rounded-full bg-plum px-6 py-3 text-xs uppercase tracking-[0.16em] text-cream transition-all hover:bg-espresso"
+            >
+              Book Your Set
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
           </Reveal>
         </div>
       </div>
