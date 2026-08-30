@@ -43,11 +43,11 @@ export function Navbar() {
             : 'bg-transparent py-4'
         }`}
       >
-        <nav className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-6 lg:px-10">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
           {/* Left — wordmark */}
           <a
             href="#top"
-            className="justify-self-start"
+            className="shrink-0"
             onClick={() => setOpen(false)}
             aria-label="Lashed Up — home"
           >
@@ -60,7 +60,7 @@ export function Navbar() {
           </a>
 
           {/* Center — desktop links */}
-          <div className="hidden items-center gap-7 justify-self-center lg:flex">
+          <div className="hidden items-center gap-7 lg:flex">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -75,7 +75,7 @@ export function Navbar() {
           </div>
 
           {/* Right — book + menu */}
-          <div className="flex items-center gap-2 justify-self-end sm:gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <a
               href={site.bookingUrl}
               target="_blank"
