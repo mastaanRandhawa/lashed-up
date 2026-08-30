@@ -10,6 +10,16 @@
     />
     <meta name="theme-color" content="#1b1330" />
 
+    <!-- Preload the LCP hero image so it downloads in parallel with the JS -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/hero-lcp-1100.webp"
+      imagesrcset="/hero/hero-lcp-700.webp 700w, /hero/hero-lcp-1100.webp 1100w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
     <!-- Open Graph -->
     <meta property="og:title" content="LASHED UP — Lash Studio in Surrey, BC" />
     <meta

@@ -2,22 +2,20 @@ import { useEffect, useState } from 'react'
 import { site } from '../data/site'
 import { ArrowUpRight, Instagram } from './Icons'
 
-import hero1_700 from '../assets/hero/hero-1-700.webp'
-import hero1_1400 from '../assets/hero/hero-1-1400.webp'
 import hero2_700 from '../assets/hero/hero-2-700.webp'
-import hero2_1400 from '../assets/hero/hero-2-1400.webp'
+import hero2_1100 from '../assets/hero/hero-2-1100.webp'
 import hero3_700 from '../assets/hero/hero-3-700.webp'
-import hero3_1400 from '../assets/hero/hero-3-1400.webp'
-import hero4_700 from '../assets/hero/hero-4-700.webp'
-import hero4_1400 from '../assets/hero/hero-4-1400.webp'
+import hero3_1100 from '../assets/hero/hero-3-1100.webp'
 
-// Real lash work from the studio, auto cross-fading behind the hero.
-// Self-hosted so the LCP image doesn't wait on a third-party origin.
+// The first (LCP) slide is served from /public with a stable name so it can be
+// <link rel="preload">-ed in index.html and start downloading immediately.
+const lcp700 = `${import.meta.env.BASE_URL}hero/hero-lcp-700.webp`
+const lcp1100 = `${import.meta.env.BASE_URL}hero/hero-lcp-1100.webp`
+
 const slides = [
-  { src700: hero1_700, src1400: hero1_1400 },
-  { src700: hero2_700, src1400: hero2_1400 },
-  { src700: hero3_700, src1400: hero3_1400 },
-  { src700: hero4_700, src1400: hero4_1400 },
+  { src700: lcp700, src1100: lcp1100 },
+  { src700: hero2_700, src1100: hero2_1100 },
+  { src700: hero3_700, src1100: hero3_1100 },
 ]
 
 export function Hero() {
@@ -25,7 +23,7 @@ export function Hero() {
   const [loadRest, setLoadRest] = useState(false)
 
   useEffect(() => {
-    const t = window.setTimeout(() => setLoadRest(true), 1200)
+    const t = window.setTimeout(() => setLoadRest(true), 1400)
     return () => window.clearTimeout(t)
   }, [])
 
@@ -33,30 +31,39 @@ export function Hero() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const id = window.setInterval(
       () => setActive((a) => (a + 1) % slides.length),
-      5000,
+      6000,
     )
     return () => window.clearInterval(id)
   }, [])
 
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden bg-espresso">
+    <section
+      id="top"
+      className="relative min-h-screen overflow-hidden bg-espresso"
+      style={{
+        // Cheap static wash — no runtime blur compositing.
+        backgroundImage:
+          'radial-gradient(60% 50% at 50% 22%, rgba(155,109,214,0.28), transparent 70%), radial-gradient(50% 40% at 85% 80%, rgba(138,122,168,0.22), transparent 70%)',
+      }}
+    >
       {/* Auto-fading lash carousel */}
       <div className="absolute inset-0">
         {slides.map((s, i) => {
           const show = i === 0 || loadRest
+          if (!show) return null
           return (
             <img
-              key={s.src1400}
-              src={show ? s.src1400 : undefined}
-              srcSet={show ? `${s.src700} 700w, ${s.src1400} 1400w` : undefined}
+              key={i}
+              src={s.src1100}
+              srcSet={`${s.src700} 700w, ${s.src1100} 1100w`}
               sizes="100vw"
               alt=""
               aria-hidden="true"
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchPriority={i === 0 ? 'high' : 'low'}
               decoding="async"
-              className={`animate-kenburns absolute inset-0 h-full w-full object-cover transition-opacity duration-[2200ms] ease-in-out ${
-                i === active ? 'opacity-100' : 'opacity-0'
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1600ms] ease-in-out ${
+                i === active ? 'animate-kenburns opacity-100' : 'opacity-0'
               }`}
             />
           )
@@ -64,10 +71,7 @@ export function Hero() {
       </div>
 
       {/* Violet veil so the wordmark and copy sit cleanly over the imagery */}
-      <div className="absolute inset-0 bg-espresso/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-espresso/80 via-espresso/45 to-espresso/95" />
-      <div className="pointer-events-none absolute left-1/2 top-1/4 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-rose/25 blur-[140px]" />
-      <div className="pointer-events-none absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-mauve/20 blur-[120px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-espresso/85 via-espresso/50 to-espresso/95" />
 
       <div className="relative z-10 flex min-h-screen flex-col justify-between px-6 pb-10 pt-28 lg:px-10">
         <div className="flex flex-1 flex-col items-center justify-center text-center">
